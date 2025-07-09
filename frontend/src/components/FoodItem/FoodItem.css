@@ -1,0 +1,147 @@
+.food-item {
+  width: 100%;
+  margin: auto;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px #00000015;
+  transition: 0.3s;
+  animation: fadeIn 1s;
+}
+
+.food-item-img-container {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.food-item-image {
+  width: 100%;
+  height: auto;
+  border-radius: 15px 15px 0 0;
+  transition: transform 0.3s ease;
+}
+
+.food-item-img-container:hover .food-item-image {
+  transform: scale(1.1);
+}
+
+.food-item-img-container .add {
+
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+  border-radius: 50px;
+  background-color: white;
+  margin-top: 8px; /* if needed, else can remove */
+  width: 42px;
+}
+
+.food-item-counter {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px;
+  border-radius: 50px;
+  background-color: white;
+  margin-top: 8px; /* if needed, else can remove */
+}
+
+.food-item-counter img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  padding: 4px;
+  background-color: #f0f0f0;
+  transition: all 0.3s ease;
+  display: inline-block;
+  transform-origin: center center;
+}
+
+.food-item-counter img:hover {
+  border-color: #4caf50;
+  background-color: #e0ffe0;
+  box-shadow: 0 2px 6px rgba(0, 128, 0, 0.3);
+}
+
+.food-item-counter p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+  min-width: 24px;
+  text-align: center;
+}
+
+.food-item-info {
+  padding: 20px;
+}
+
+.food-item-name-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.food-item-name-rating p {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.food-item-name-rating img {
+  width: 70px;
+}
+
+.food-item-desc {
+  color: #676767;
+  font-size: 12px;
+}
+
+.food-item-price {
+  color: tomato;
+  font-size: 22px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+@keyframes openLeft {
+  0% {
+    transform: scaleX(0) translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1) translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes closeRight {
+  0% {
+    transform: scaleX(1) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(0) translateX(1px);
+    opacity: 0;
+  }
+}
+
+.anim-open-left {
+  animation: openLeft 0.3s forwards ease-out;
+transition: 1s;
+}
+
+.anim-open-right {
+  animation: closeRight 0.3s forwards ease-in;
+
+  transition: 1s;
+
+}
