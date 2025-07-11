@@ -3,27 +3,46 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import validator from 'validator'
 //login user
-const loginUser = async (req,res) =>{
-    const {email, password} = req.body;
+const loginUser = async (req, res) => {
+    const { email, password } = req.body;
+     console.log(req.body);
+     
     try {
-        const user = await userModel.findOne({email});
-
-        if(!user){
-           return res.json({success:false, message:'User does not exist'}) 
+        const user = await userModel.findOne({ email });
+   
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                field: 'email',
+                message: 'The email address you entered is not registered.'
+            });
         }
-        const isMatch = await bcrypt.compare(password,user.password)
 
-        if(!isMatch){
-            return res.json({success:false, message:'Invalid credentials'})
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(401).json({
+                success: false,
+                field: 'password',
+                message: 'The password you entered is incorrect.'
+            });
         }
 
         const token = createToken(user._id);
-        res.json({success:true, token})
+        return res.status(200).json({
+            success: true,
+            token
+        });
+
     } catch (error) {
-        console.log(error)
-        res.json({success:false, message:'Error'})
+        console.error('Login error:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'An internal server error occurred. Please try again later.'
+        });
     }
-}
+};
+
 
 const createToken = (id) =>{
     return jwt.sign({id},process.env.JWT_SECRET)
